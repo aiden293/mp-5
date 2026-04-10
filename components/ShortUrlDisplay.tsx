@@ -1,7 +1,7 @@
 "use client";
 
 import { ShortUrlProps } from "@/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewShortUrlForm from "./NewShortUrlForm";
 
 export default function ShortUrlDisplay({
@@ -10,6 +10,11 @@ export default function ShortUrlDisplay({
   inputUrls: ShortUrlProps[];
 }) {
   const [urls, setUrls] = useState(inputUrls);
+  const [origin, setOrigin] = useState("");
+
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
 
   function append(newUrl: ShortUrlProps) {
     setUrls([newUrl, ...urls]);
@@ -27,7 +32,7 @@ export default function ShortUrlDisplay({
           </p>
 
           <p className="break-all text-sm">
-            Short: {window.location.origin}/{u.alias}
+            Short: {origin ? `${origin}/${u.alias}` : `/${u.alias}`}
           </p>
         </div>
       ))}
