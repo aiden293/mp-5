@@ -21,7 +21,14 @@ export default function ShortUrlDisplay({
       {urls.map((u) => (
         <div key={u.id} className="bg-sky-400 rounded-xl p-4 m-2 w-96">
           <h4 className="font-bold text-2xl">{u.alias}</h4>
-          <p className="break-all">{u.originalUrl}</p>
+
+          <p className="break-all text-sm">
+            Original: {u.originalUrl}
+          </p>
+
+          <p className="break-all text-sm">
+            Short: {window.location.origin}/{u.alias}
+          </p>
         </div>
       ))}
     </div>
